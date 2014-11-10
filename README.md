@@ -1,7 +1,9 @@
 # Docker sonarr (previously NzbDrone)
 
-Exposes port 8989 - web intergace
+Exposes port 8989 - web interface
+
 Volume /config - Sonarr's configuration database
+
 Volume /media - Media files to import
 
 ## Running
