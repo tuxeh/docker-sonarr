@@ -18,8 +18,14 @@ RUN apt-get update -q && apt-get install -qy libmono-cil-dev nzbdrone
 EXPOSE 8989
 VOLUME /config
 VOLUME /media
+RUN chown -R nobody: /config
+RUN chown -R nobody: /media
 
 RUN mkdir /etc/service/sonarr
 ADD sonarr.sh /etc/service/sonarr/run
 ADD sonarr-update.sh /etc/service/sonarr/update.sh
-RUN chmod +x /etc/service/sonarr/*
+RUN chmod 755 /etc/service/sonarr/*
+RUN chown -R nobody: /etc/service/sonarr/*
+RUN chown -R nobody /opt/NzbDrone
+ADD sonarr-perm.sh /root/sonarr-perm.sh
+ADD sonarr-cron.sh /etc/cron.d/sonarr-perm
