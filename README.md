@@ -1,0 +1,2 @@
+# Docker sonnarr (previous NzbDrone)
+
