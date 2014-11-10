@@ -1,2 +1,2 @@
-# Docker sonnarr (previous NzbDrone)
+# Docker sonarr (previous NzbDrone)
 
