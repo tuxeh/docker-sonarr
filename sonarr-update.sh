@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 # 52 /tmp/nzbdrone_update /opt/NzbDrone/NzbDrone.exe
 

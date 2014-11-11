@@ -21,3 +21,5 @@ sudo docker run --name sonarr -v /path/to/your/config/folder/:/config -v /path/t
 ## Configuring
 
 By default, this container will use the Sonarr master branch. To change branches and update successfully, you must configure Sonarr to use the update script in ```/etc/service/sonarr/update.sh```. This is configured under Settings > (show advanced) > General > Updates > change Mechanism to Script.
+
+The configuration folder on the host must be readable/writable by the nobody user.
