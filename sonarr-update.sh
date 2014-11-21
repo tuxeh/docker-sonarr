@@ -2,9 +2,9 @@
 
 # 52 /tmp/nzbdrone_update /opt/NzbDrone/NzbDrone.exe
 
-sv stop sonarr
-
-rm -Rf /opt/NzbDrone/*
+echo "updating sonarr"
+rm -Rfv /opt/NzbDrone/*
 mv $2/NzbDrone/* /opt/NzbDrone/
 
-sv start sonarr
+echo "sending term to sonarr, configure docker to automatically restart this container"
+kill $1

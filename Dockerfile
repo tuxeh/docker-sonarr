@@ -1,25 +1,27 @@
-FROM phusion/baseimage:0.9.15
+FROM ubuntu:14.04
 
-ENV HOME /root
-RUN rm -rf /etc/service/sshd /etc/my_init.d/00_regen_ssh_host_keys.sh
+# use sonarr master branch, user can change branch and update within sonarr
+RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys FDA5DFFC \
+  && echo "deb http://apt.sonarr.tv/ master main" | sudo tee -a /etc/apt/sources.list \
+  && apt-get update -q \
+  && apt-get install -qy nzbdrone \
+  ; apt-get clean \
+  ; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-CMD ["/sbin/my_init"]
+RUN chown -R nobody:users /opt/NzbDrone \
+  ; mkdir -p /volumes/config/sonarr /volumes/completed /volumes/media \
+  && chown -R nobody:users /volumes
 
-# when sonarr restarts after an update, it doesn't pass in the -data argument
-RUN mkdir /root/.config
-RUN ln -s /config /root/.config/NzbDrone
-
-# user sonarr master branch, user can change branch and update within sonarr
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys FDA5DFFC
-RUN echo "deb https://apt.sonarr.tv/ master main" | sudo tee -a /etc/apt/sources.list
-
-RUN apt-get update -q && apt-get install -qy libmono-cil-dev nzbdrone
+ADD sonarr-update.sh /sonarr-update.sh
+RUN chmod 755 /sonarr-update.sh \
+  && chown nobody:users /sonarr-update.sh
 
 EXPOSE 8989
-VOLUME /config
-VOLUME /media
+VOLUME /volumes/config
+VOLUME /volumes/completed
+VOLUME /volumes/media
 
-RUN mkdir /etc/service/sonarr
-ADD sonarr.sh /etc/service/sonarr/run
-ADD sonarr-update.sh /etc/service/sonarr/update.sh
-RUN chmod +x /etc/service/sonarr/*
+USER nobody
+WORKDIR /opt/NzbDrone
+
+ENTRYPOINT ["mono", "NzbDrone.exe", "--nobrowser", "-data=/volumes/config/sonarr"]
