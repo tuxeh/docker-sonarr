@@ -1,10 +1,10 @@
-FROM ubuntu:14.04
+FROM debian:jessie
 
 # use sonarr master branch, user can change branch and update within sonarr
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys FDA5DFFC \
-  && echo "deb http://apt.sonarr.tv/ master main" | sudo tee -a /etc/apt/sources.list \
+  && echo "deb http://apt.sonarr.tv/ master main" | tee -a /etc/apt/sources.list \
   && apt-get update -q \
-  && apt-get install -qy nzbdrone \
+  && apt-get install -qy nzbdrone mono-4.0-service \
   ; apt-get clean \
   ; rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -21,7 +21,10 @@ VOLUME /volumes/config
 VOLUME /volumes/completed
 VOLUME /volumes/media
 
+ADD start.sh /
+RUN chmod +x /start.sh
+
 USER nobody
 WORKDIR /opt/NzbDrone
 
-ENTRYPOINT ["mono", "NzbDrone.exe", "--nobrowser", "-data=/volumes/config/sonarr"]
+ENTRYPOINT ["/start.sh"]
