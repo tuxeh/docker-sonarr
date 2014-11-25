@@ -12,6 +12,8 @@
 | /volumes/completed | Completed downloads from download client |
 | /volumes/media | Sonarr media folder |
 
+Docker runs as uid 65534 (nobody on debian, nfsnobody on fedora). When mounting volumes from the host, ensure this uid has the correct permission on the folders.
+
 ## Running
 
 The quickest way to get it running without integrating with a download client or media server (plex)
