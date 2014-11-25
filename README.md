@@ -1,16 +1,16 @@
-# Docker sonarr (previously NzbDrone)
+# Docker Sonarr (previously NzbDrone)
+
+### Tags
+- tuxeh/sonarr:**latest** - Installs from Sonarr master repository
+- tuxeh/sonarr:**develop** - Installs from Sonarr develop repository
 
 ### Ports
-|   |  Port  |  Comment |
-|----------|-------------|------|
-| TCP |  8989  | Web Interface |
+- **TCP 8989** - Web Interface
 
 ### Volumes
-| Path |  Comment  |
-|----------|-------------|
-| /volumes/config | Sonarr configuration data |
-| /volumes/completed | Completed downloads from download client |
-| /volumes/media | Sonarr media folder |
+- **/volumes/config** - Sonarr configuration data
+- **/volumes/completed** - Completed downloads from download client
+- **/volumes/media** - Sonarr media folder
 
 Docker runs as uid 65534 (nobody on debian, nfsnobody on fedora). When mounting volumes from the host, ensure this uid has the correct permission on the folders.
 
@@ -28,6 +28,6 @@ sudo docker run --restart always --name sonarr --volumes-from plex --link plex:p
 
 ## Updating
 
-By default, this container will use the Sonarr develop branch. To change branches and update successfully, you must configure Sonarr to use the update script in ``/sonarr-update.sh``. This is configured under Settings > (show advanced) > General > Updates > change Mechanism to Script.
+To change branches and update successfully, you must configure Sonarr to use the update script in ``/sonarr-update.sh``. This is configured under Settings > (show advanced) > General > Updates > change Mechanism to Script.
 
-After updating, the update script will stop the container. If the container was run with --restart always, docker will automatically restart Sonarr.
+After updating, the update script will stop the container. If the container was run with `--restart always`, docker will automatically restart Sonarr.
