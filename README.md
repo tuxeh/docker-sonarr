@@ -28,6 +28,6 @@ sudo docker run --restart always --name sonarr --volumes-from plex --link plex:p
 
 ## Updating
 
-To change branches and update successfully, you must configure Sonarr to use the update script in ``/sonarr-update.sh``. This is configured under Settings > (show advanced) > General > Updates > change Mechanism to Script.
+To update successfully, you must configure Sonarr to use the update script in ``/sonarr-update.sh``. This is configured under Settings > (show advanced) > General > Updates > change Mechanism to Script.
 
 After updating, the update script will stop the container. If the container was run with `--restart always`, docker will automatically restart Sonarr.
