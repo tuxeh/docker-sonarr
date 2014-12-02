@@ -1,4 +1,5 @@
 FROM debian:jessie
+MAINTAINER tuxeh <sirtuxeh@gmail.com>
 
 # use sonarr master branch, user can change branch and update within sonarr
 RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys FDA5DFFC \
