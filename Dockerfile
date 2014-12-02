@@ -17,10 +17,10 @@ VOLUME /volumes/config
 VOLUME /volumes/completed
 VOLUME /volumes/media
 
-ADD start.sh /
+ADD develop/start.sh /
 RUN chmod +x /start.sh
 
-ADD sonarr-update.sh /sonarr-update.sh
+ADD develop/sonarr-update.sh /sonarr-update.sh
 RUN chmod 755 /sonarr-update.sh \
   && chown nobody:users /sonarr-update.sh
 
