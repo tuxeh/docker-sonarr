@@ -14,6 +14,7 @@ RUN chown -R nobody:users /opt/NzbDrone \
   && chown -R nobody:users /volumes
 
 EXPOSE 8989
+EXPOSE 8989
 VOLUME /volumes/config
 VOLUME /volumes/completed
 VOLUME /volumes/media
