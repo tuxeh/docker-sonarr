@@ -7,7 +7,7 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
   && apt-key adv --keyserver keyserver.ubuntu.com --recv-keys FDA5DFFC \
   && echo "deb http://apt.sonarr.tv/ develop main" | tee -a /etc/apt/sources.list \
   && apt-get update -q \
-  && apt-get install -qy nzbdrone mediainfo \
+  && apt-get install -qy nzbdrone mediainfo curl\
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
